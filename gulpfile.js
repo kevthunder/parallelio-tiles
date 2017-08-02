@@ -1,7 +1,5 @@
 var gulp = require('gulp');
-var rename = require("gulp-rename");
 var coffee = require('gulp-coffee');
-var uglify = require('gulp-uglify');
 var mocha = require('gulp-mocha');
 
 gulp.task('coffee', function() {
