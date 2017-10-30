@@ -12,10 +12,12 @@ class TileContainer extends Element
     @tiles = []
 
   addTile: (tile) ->
-    @tiles.push(tile)
-    @coords[tile.x] = {} unless @coords[tile.x]?
-    @coords[tile.x][tile.y] = tile
-    tile.container = this
+    unless @tiles.includes(tile)
+      @tiles.push(tile)
+      @coords[tile.x] = {} unless @coords[tile.x]?
+      @coords[tile.x][tile.y] = tile
+      tile.container = this
+    this
     
   getTile: (x, y) ->
     if @coords[x]?[y]?
@@ -34,6 +36,7 @@ class TileContainer extends Element
           tile.x = options.x
           tile.y = options.y
           @addTile(tile)
+    this
         
   allTiles: ->
     @tiles.slice()
@@ -43,6 +46,7 @@ class TileContainer extends Element
       tile.container = null
     @coords = {}
     @tiles = []
+    this
     
       
 
