@@ -1,7 +1,4 @@
-#--- Standalone ---
-Element = @Spark?.Element || require('spark-starter').Element
-#--- Standalone end ---
-
+Element = require('spark-starter').Element
 
 class Tile extends Element
   constructor: (@x, @y) ->
@@ -26,15 +23,3 @@ class Tile extends Element
       @children.splice(index, 1)
     if child.tile == this
       child.tile = null
-
-
-if Parallelio?
-  Parallelio.Tile = Tile
-#--- Standalone ---
-if module?
-  module.exports = Tile
-else
-  unless @Parallelio?
-    @Parallelio = {}
-  @Parallelio.Tile = Tile
-#--- Standalone end ---

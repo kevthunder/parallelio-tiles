@@ -1,6 +1,4 @@
-#--- Standalone ---
-Element = @Spark?.Element || require('spark-starter').Element
-#--- Standalone end ---
+Element = require('spark-starter').Element
 
 
 class TileContainer extends Element
@@ -47,16 +45,3 @@ class TileContainer extends Element
     @coords = {}
     @tiles = []
     this
-    
-      
-
-if Parallelio?
-  Parallelio.TileContainer = TileContainer
-#--- Standalone ---
-if module?
-  module.exports = TileContainer
-else
-  unless @Parallelio?
-    @Parallelio = {}
-  @Parallelio.TileContainer = TileContainer
-#--- Standalone end ---
