@@ -51,3 +51,25 @@ describe 'TileContainer', ->
 
     res
     assert.equal container, res
+
+  it 'can get tile in a range', ->
+    container = new TileContainer()
+    container.tap ->
+      t = (opt) ->
+        (new Tile(opt.x,opt.y)).tap ->
+          @walkable = false
+      @loadMatrix([
+        [t, t, t, t, t, t, t],
+        [t, t, t, t, t, t, t],
+        [t, t, t, t, t, t, t],
+        [t, t, t, t, t, t, t],
+        [t, t, t, t, t, t, t],
+        [t, t, t, t, t, t, t],
+        [t, t, t, t, t, t, t]
+      ]);
+    center = container.getTile(3,3)
+    inRange = container.inRange(center,2)
+    assert.include inRange, container.getTile(2,3)
+    assert.notInclude inRange, container.getTile(1,3)
+    assert.notInclude inRange, container.getTile(0,3)
+    assert.equal inRange.length, 5

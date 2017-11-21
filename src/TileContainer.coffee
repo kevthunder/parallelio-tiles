@@ -35,6 +35,15 @@ class TileContainer extends Element
           tile.y = options.y
           @addTile(tile)
     this
+    
+  inRange: (tile, range)->
+    tiles = []
+    range--
+    for x in [tile.x-range..tile.x+range]
+      for y in [tile.y-range..tile.y+range]
+        if Math.sqrt((x-tile.x)*(x-tile.x)+(y-tile.y)*(y-tile.y)) <= range and (found = @getTile(x, y))?
+          tiles.push found
+    tiles
         
   allTiles: ->
     @tiles.slice()
