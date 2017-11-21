@@ -1,5 +1,5 @@
 class Direction
-  constructor: (@name,@x,y,@inverseName)->
+  constructor: (@name,@x,@y,@inverseName)->
   getInverse: ->
     this.constructor[@inverseName]
 

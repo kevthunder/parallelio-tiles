@@ -18,6 +18,6 @@
     "spark-wrapper": "github:kevthunder/spark-wrapper"
   },
   "dependencies": {
-    "spark-starter": "kevthunder/spark-starter#v0.5.x"
+    "spark-starter": "kevthunder/spark-starter#v0.6.x"
   }
 }
