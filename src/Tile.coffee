@@ -23,3 +23,17 @@ class Tile extends Element
       @children.splice(index, 1)
     if child.tile == this
       child.tile = null
+
+  dist: (tile)->
+    if @container == tile.container || ctnDist = @container.dist?(tile.container)
+      x = tile.x - @x
+      y = tile.y - @y
+      if ctnDist
+        x += ctnDist.x
+        y += ctnDist.y
+      {
+        x:x
+        y:y
+        h:Math.sqrt(x*x+y*y)
+      }
+      
