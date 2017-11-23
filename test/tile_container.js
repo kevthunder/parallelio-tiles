@@ -22,6 +22,71 @@
       container.addTile(tile);
       return assert.equal(container.tiles.length, 1);
     });
+    it('can remove tile', function() {
+      var container, tile;
+      container = new TileContainer();
+      tile = new Tile();
+      assert.equal(container.tiles.length, 0);
+      container.addTile(tile);
+      assert.equal(container.tiles.length, 1);
+      container.removeTile(tile);
+      return assert.equal(container.tiles.length, 0);
+    });
+    it('can remove tile from coordinates', function() {
+      var container, tile;
+      container = new TileContainer();
+      tile = new Tile(1, 1);
+      assert.equal(container.tiles.length, 0);
+      container.addTile(tile);
+      assert.equal(container.tiles.length, 1);
+      container.removeTileAt(1, 1);
+      return assert.equal(container.tiles.length, 0);
+    });
+    it('calcul boundaries', function() {
+      var container;
+      container = new TileContainer();
+      assert.deepEqual(container.boundaries, {
+        top: null,
+        left: null,
+        bottom: null,
+        right: null
+      });
+      container.addTile(new Tile(1, 1));
+      assert.deepEqual(container.boundaries, {
+        top: 1,
+        left: 1,
+        bottom: 1,
+        right: 1
+      });
+      container.addTile(new Tile(3, 1));
+      assert.deepEqual(container.boundaries, {
+        top: 1,
+        left: 1,
+        bottom: 1,
+        right: 3
+      });
+      container.addTile(new Tile(-3, -3));
+      assert.deepEqual(container.boundaries, {
+        top: -3,
+        left: -3,
+        bottom: 1,
+        right: 3
+      });
+      container.addTile(new Tile(2, 2));
+      assert.deepEqual(container.boundaries, {
+        top: -3,
+        left: -3,
+        bottom: 2,
+        right: 3
+      });
+      container.removeTileAt(3, 1);
+      return assert.deepEqual(container.boundaries, {
+        top: -3,
+        left: -3,
+        bottom: 2,
+        right: 2
+      });
+    });
     it('should create load a Matrix of tiles', function() {
       var container;
       container = new TileContainer();
