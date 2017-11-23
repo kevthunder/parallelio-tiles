@@ -37,11 +37,16 @@ describe 'Tile', ->
     assert.include tile.children, child
 
   it 'can calcul the distance to a tile', ->
-    container = generateMap()
-    tile1 = container.getTile(1,1)
-    tile2 = container.getTile(4,5)
+    tile1 = new Tile(1,1)
+    tile2 = new Tile(4,5)
     assert.deepEqual tile1.dist(tile2), {x:3,y:4,length:5}
     assert.deepEqual tile2.dist(tile1), {x:-3,y:-4,length:5}
+
+  it 'return null for distance if there is no coordinates', ->
+    tile1 = new Tile(1,1)
+    tile2 = new Tile()
+    assert.isNull tile1.dist(tile2)
+    assert.isNull tile2.dist(tile1)
 
   it 'can calcul the distance to a tile in a different container', ->
     container1 = generateMap()

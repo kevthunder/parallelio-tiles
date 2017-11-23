@@ -25,7 +25,7 @@ class Tile extends Element
       child.tile = null
 
   dist: (tile)->
-    if @container == tile.container || ctnDist = @container.dist?(tile.container)
+    if tile?.x? and tile.y? and @x? and @y? and (@container == tile.container || ctnDist = @container?.dist?(tile.container))
       x = tile.x - @x
       y = tile.y - @y
       if ctnDist
@@ -36,4 +36,6 @@ class Tile extends Element
         y:y
         length:Math.sqrt(x*x+y*y)
       }
+    else
+      null
       
