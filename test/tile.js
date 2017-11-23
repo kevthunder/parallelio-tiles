@@ -49,12 +49,12 @@
       assert.deepEqual(tile1.dist(tile2), {
         x: 3,
         y: 4,
-        h: 5
+        length: 5
       });
       return assert.deepEqual(tile2.dist(tile1), {
         x: -3,
         y: -4,
-        h: 5
+        length: 5
       });
     });
     it('can calcul the distance to a tile in a different container', function() {
@@ -64,7 +64,7 @@
         return {
           x: 30,
           y: 40,
-          h: 50
+          length: 50
         };
       };
       tile1 = container1.getTile(1, 1);
@@ -73,19 +73,19 @@
         return {
           x: -30,
           y: -40,
-          h: 50
+          length: 50
         };
       };
       tile2 = container2.getTile(1, 1);
       assert.deepEqual(tile1.dist(tile2), {
         x: 30,
         y: 40,
-        h: 50
+        length: 50
       });
       return assert.deepEqual(tile2.dist(tile1), {
         x: -30,
         y: -40,
-        h: 50
+        length: 50
       });
     });
     return it('cant add a children twice', function() {

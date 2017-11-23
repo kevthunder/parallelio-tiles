@@ -34,6 +34,6 @@ class Tile extends Element
       {
         x:x
         y:y
-        h:Math.sqrt(x*x+y*y)
+        length:Math.sqrt(x*x+y*y)
       }
       
