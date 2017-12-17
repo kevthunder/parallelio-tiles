@@ -8,3 +8,7 @@ class Tiled extends Element
           old.removeChild(this)
         if @tile
           @tile.addChild(this)
+    offsetX:
+      default: 0
+    offsetY:
+      default: 0

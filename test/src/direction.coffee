@@ -1,5 +1,5 @@
 assert = require('chai').assert
-Tile = require('../lib/Direction')
+Direction = require('../lib/Direction')
 
 
 describe 'Direction', ->

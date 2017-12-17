@@ -1,9 +1,9 @@
 (function() {
-  var Tile, assert;
+  var Direction, assert;
 
   assert = require('chai').assert;
 
-  Tile = require('../lib/Direction');
+  Direction = require('../lib/Direction');
 
   describe('Direction', function() {
     it('has coordinates', function() {
