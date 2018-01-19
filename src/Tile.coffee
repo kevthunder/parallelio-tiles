@@ -3,9 +3,12 @@ Element = require('spark-starter').Element
 class Tile extends Element
   constructor: (@x, @y) ->
     @init()
-    
+
   init: ->
-    @children = []
+    
+  @properties
+    children:
+      collection: true
     
   getRelativeTile: (x, y) ->
     @container.getTile(@x + x, @y + y)

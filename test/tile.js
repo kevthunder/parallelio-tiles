@@ -39,7 +39,7 @@
       child = {};
       tile.addChild(child);
       assert.equal(child.tile, tile);
-      return assert.include(tile.children, child);
+      return assert.include(tile.children.toArray(), child);
     });
     it('can calcul the distance to a tile', function() {
       var tile1, tile2;
@@ -102,7 +102,7 @@
       tile.addChild(child);
       assert.equal(child.tile, tile);
       assert.equal(tile.children.length, 1);
-      return assert.include(tile.children, child);
+      return assert.include(tile.children.toArray(), child);
     });
   });
 

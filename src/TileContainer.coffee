@@ -13,7 +13,7 @@ class TileContainer extends Element
           @_addToBondaries(tile, boundaries)
         boundaries
       output:(val)->
-        Object.assign(val)
+        Object.assign({},val)
 
   _addToBondaries: (tile, boundaries)->
     if !boundaries.top? || tile.y < boundaries.top

@@ -11,6 +11,6 @@ describe 'Tiled', ->
 
     assert.equal tiled.tile, tile
     assert.equal tile.children.length, 1
-    assert.include tile.children, tiled
+    assert.include tile.children.toArray(), tiled
 
 

@@ -15,7 +15,7 @@
       tiled.tile = tile;
       assert.equal(tiled.tile, tile);
       assert.equal(tile.children.length, 1);
-      return assert.include(tile.children, tiled);
+      return assert.include(tile.children.toArray(), tiled);
     });
   });
 

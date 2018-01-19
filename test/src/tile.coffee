@@ -34,7 +34,7 @@ describe 'Tile', ->
     tile.addChild(child)
 
     assert.equal child.tile, tile
-    assert.include tile.children, child
+    assert.include tile.children.toArray(), child
 
   it 'can calcul the distance to a tile', ->
     tile1 = new Tile(1,1)
@@ -66,5 +66,5 @@ describe 'Tile', ->
 
     assert.equal child.tile, tile
     assert.equal tile.children.length, 1
-    assert.include tile.children, child
+    assert.include tile.children.toArray(), child
 
