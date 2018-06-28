@@ -68,3 +68,12 @@ describe 'Tile', ->
     assert.equal tile.children.length, 1
     assert.include tile.children.toArray(), child
 
+  it "can find it's adjacent tiles", ->
+    container = generateMap()
+    assert.include container.getTile(1,1).adjacentTiles.toArray(), container.getTile(0,1)
+    assert.include container.getTile(1,1).adjacentTiles.toArray(), container.getTile(2,1)
+    assert.include container.getTile(1,1).adjacentTiles.toArray(), container.getTile(1,0)
+    assert.include container.getTile(1,1).adjacentTiles.toArray(), container.getTile(1,2)
+
+
+

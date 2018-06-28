@@ -94,7 +94,7 @@
         length: 50
       });
     });
-    return it('cant add a children twice', function() {
+    it('cant add a children twice', function() {
       var child, tile;
       tile = new Tile();
       child = {};
@@ -103,6 +103,14 @@
       assert.equal(child.tile, tile);
       assert.equal(tile.children.length, 1);
       return assert.include(tile.children.toArray(), child);
+    });
+    return it("can find it's adjacent tiles", function() {
+      var container;
+      container = generateMap();
+      assert.include(container.getTile(1, 1).adjacentTiles.toArray(), container.getTile(0, 1));
+      assert.include(container.getTile(1, 1).adjacentTiles.toArray(), container.getTile(2, 1));
+      assert.include(container.getTile(1, 1).adjacentTiles.toArray(), container.getTile(1, 0));
+      return assert.include(container.getTile(1, 1).adjacentTiles.toArray(), container.getTile(1, 2));
     });
   });
 

@@ -1,6 +1,6 @@
 {
   "name": "parallelio-tiles",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Parallelio tiles component",
   "main": "lib/tiles.js",
   "scripts": {
