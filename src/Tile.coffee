@@ -26,7 +26,14 @@ class Tile extends Element
     
   getRelativeTile: (x, y) ->
     @container.getTile(@x + x, @y + y)
-    
+
+  findDirectionOf: (tile) ->
+    if tile.tile
+      tile = tile.tile
+    if tile.x? and tile.y?
+      Direction.all.find (d)=>
+        d.x == tile.x - @x and d.y == tile.y - @y
+      
   addChild: (child) ->
     index = @children.indexOf(child)
     if index == -1

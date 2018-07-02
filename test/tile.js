@@ -1,11 +1,15 @@
 (function() {
-  var Tile, TileContainer, assert, generateMap;
+  var Direction, Tile, TileContainer, Tiled, assert, generateMap;
 
   assert = require('chai').assert;
 
   TileContainer = require('../lib/TileContainer');
 
   Tile = require('../lib/Tile');
+
+  Tiled = require('../lib/Tiled');
+
+  Direction = require('../lib/Direction');
 
   generateMap = function() {
     var container;
@@ -104,13 +108,28 @@
       assert.equal(tile.children.length, 1);
       return assert.include(tile.children.toArray(), child);
     });
-    return it("can find it's adjacent tiles", function() {
+    it("can find it's adjacent tiles", function() {
       var container;
       container = generateMap();
       assert.include(container.getTile(1, 1).adjacentTiles.toArray(), container.getTile(0, 1));
       assert.include(container.getTile(1, 1).adjacentTiles.toArray(), container.getTile(2, 1));
       assert.include(container.getTile(1, 1).adjacentTiles.toArray(), container.getTile(1, 0));
       return assert.include(container.getTile(1, 1).adjacentTiles.toArray(), container.getTile(1, 2));
+    });
+    it("can find direction of a Tile", function() {
+      var tile1, tile2;
+      tile1 = new Tile(1, 1);
+      tile2 = new Tile(1, 2);
+      return assert.equal(tile1.findDirectionOf(tile2), Direction.down);
+    });
+    return it("can find direction of a tiled Object", function() {
+      var tile1, tile2, tiled;
+      tile1 = new Tile(1, 1);
+      tile2 = new Tile(1, 0);
+      tiled = new Tiled().tap(function() {
+        return this.tile = tile2;
+      });
+      return assert.equal(tile1.findDirectionOf(tiled), Direction.up);
     });
   });
 

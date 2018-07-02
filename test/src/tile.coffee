@@ -1,6 +1,8 @@
 assert = require('chai').assert
 TileContainer = require('../lib/TileContainer')
 Tile = require('../lib/Tile')
+Tiled = require('../lib/Tiled')
+Direction = require('../lib/Direction')
 
 generateMap = ->
   container = new TileContainer()
@@ -74,6 +76,20 @@ describe 'Tile', ->
     assert.include container.getTile(1,1).adjacentTiles.toArray(), container.getTile(2,1)
     assert.include container.getTile(1,1).adjacentTiles.toArray(), container.getTile(1,0)
     assert.include container.getTile(1,1).adjacentTiles.toArray(), container.getTile(1,2)
+
+  it "can find direction of a Tile", ->
+    tile1 = new Tile(1,1)
+    tile2 = new Tile(1,2)
+
+    assert.equal tile1.findDirectionOf(tile2), Direction.down
+
+  it "can find direction of a tiled Object", ->
+    tile1 = new Tile(1,1)
+    tile2 = new Tile(1,0)
+    tiled = new Tiled().tap ->
+      @tile = tile2
+
+    assert.equal tile1.findDirectionOf(tiled), Direction.up
 
 
 
