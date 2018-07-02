@@ -25,11 +25,6 @@ generateMap = ->
     ]);
 
 describe 'Tile', ->
-  it 'can get a Tile by relative position', ->
-    container = generateMap()
-    tile = container.getTile(1,1)
-    assert.equal tile.getRelativeTile(1,1), container.getTile(2,2)
-
   it 'can add a children', ->
     tile = new Tile()
     child = {}
@@ -37,6 +32,15 @@ describe 'Tile', ->
 
     assert.equal child.tile, tile
     assert.include tile.children.toArray(), child
+
+  it 'can get a Tile by relative position', ->
+    container = generateMap()
+    tile = container.getTile(1,1)
+    assert.equal tile.getRelativeTile(1,1), container.getTile(2,2)
+
+  it 'require a container to get a Tile by relative position', ->
+    tile = new Tile()
+    assert.notExists tile.getRelativeTile(1,1)
 
   it 'can calcul the distance to a tile', ->
     tile1 = new Tile(1,1)

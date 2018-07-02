@@ -16,16 +16,18 @@ class Tile extends Element
         @adjacentTiles.forEach (tile)->
           tile.invalidateAdjacentTiles()
     adjacentTiles:
-      calcul: ->
-        Direction.adjacents.map (d)=>
-            @getRelativeTile(d.x, d.y)
-          .filter (t)=>
-            t?
+      calcul: (invalidation)->
+        if @container?
+          Direction.adjacents.map (d)=>
+              @getRelativeTile(d.x, d.y)
+            .filter (t)=>
+              t?
       collection: true
 
     
   getRelativeTile: (x, y) ->
-    @container.getTile(@x + x, @y + y)
+    if @container?
+      @container.getTile(@x + x, @y + y)
 
   findDirectionOf: (tile) ->
     if tile.tile

@@ -31,12 +31,6 @@
   };
 
   describe('Tile', function() {
-    it('can get a Tile by relative position', function() {
-      var container, tile;
-      container = generateMap();
-      tile = container.getTile(1, 1);
-      return assert.equal(tile.getRelativeTile(1, 1), container.getTile(2, 2));
-    });
     it('can add a children', function() {
       var child, tile;
       tile = new Tile();
@@ -44,6 +38,17 @@
       tile.addChild(child);
       assert.equal(child.tile, tile);
       return assert.include(tile.children.toArray(), child);
+    });
+    it('can get a Tile by relative position', function() {
+      var container, tile;
+      container = generateMap();
+      tile = container.getTile(1, 1);
+      return assert.equal(tile.getRelativeTile(1, 1), container.getTile(2, 2));
+    });
+    it('require a container to get a Tile by relative position', function() {
+      var tile;
+      tile = new Tile();
+      return assert.notExists(tile.getRelativeTile(1, 1));
     });
     it('can calcul the distance to a tile', function() {
       var tile1, tile2;
