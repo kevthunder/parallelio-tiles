@@ -36,18 +36,19 @@ class Tile extends Element
       Direction.all.find (d)=>
         d.x == tile.x - @x and d.y == tile.y - @y
       
-  addChild: (child) ->
+  addChild: (child, checkRef = true) ->
     index = @children.indexOf(child)
     if index == -1
       @children.push(child)
-    child.tile = this
+    if checkRef
+      child.tile = this
     child
     
-  removeChild: (child) ->
+  removeChild: (child, checkRef = true) ->
     index = @children.indexOf(child)
     if index > -1
       @children.splice(index, 1)
-    if child.tile == this
+    if checkRef && child.tile == this
       child.tile = null
 
   dist: (tile)->
