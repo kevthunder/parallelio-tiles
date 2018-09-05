@@ -17,12 +17,13 @@ gulp.task('coffeeTest', function() {
     .pipe(gulp.dest('./test/'));
 });
 
-gulp.task('build', gulp.series('coffee', function () {
+var build;
+gulp.task('build', build = gulp.series('coffee', function (done) {
     console.log('Build Complete');
+    done();
 }));
 
-var build;
-gulp.task('test', build = gulp.series('coffee','coffeeTest', function() {
+gulp.task('test', gulp.series('coffee','coffeeTest', function() {
   return gulp.src('./test/tests.js')
     .pipe(mocha());
 }));
