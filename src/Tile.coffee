@@ -3,6 +3,7 @@ Direction = require('./Direction')
 
 class Tile extends Element
   constructor: (@x, @y) ->
+    super()
     @init()
 
   init: ->

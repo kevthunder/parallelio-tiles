@@ -3,6 +3,7 @@ Element = require('spark-starter').Element
 
 class TileContainer extends Element
   constructor: ->
+    super()
     @init()
     
   @properties
