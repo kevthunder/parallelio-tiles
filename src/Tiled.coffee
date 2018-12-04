@@ -21,7 +21,7 @@ class Tiled extends Element
   getRandomValidTile: (tiles)->
     remaining = tiles.slice()
     while remaining.length > 0
-      pos = remaining[Math.floor(Math.random()*remaining.length)]
+      pos = Math.floor(Math.random()*remaining.length)
       candidate = remaining.splice(pos,1)[0]
       if @canGoOnTile(candidate)
         return candidate
