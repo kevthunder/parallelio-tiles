@@ -5,6 +5,7 @@
   "main": "lib/tiles.js",
   "scripts": {
     "test": "gulp test",
+    "test-debug": "gulp test-debug",
     "build": "gulp build"
   },
   "author": "kevthunder",
@@ -15,6 +16,7 @@
     "gulp-coffee": "^3.0.2",
     "gulp-mocha": "^6.0.0",
     "mocha": "^5.2.0",
+    "source-map-support": "^0.5.9",
     "spark-wrapper": "github:kevthunder/spark-wrapper"
   },
   "dependencies": {

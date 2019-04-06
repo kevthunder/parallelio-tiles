@@ -14,11 +14,12 @@ class Tile extends Element
       collection: true
     container: 
       change: ->
-        @adjacentTiles.forEach (tile)->
-          tile.invalidateAdjacentTiles()
+        if @container?
+          @adjacentTiles.forEach (tile)->
+            tile.invalidateAdjacentTiles()
     adjacentTiles:
       calcul: (invalidation)->
-        if @container?
+        if invalidation.prop('container')
           Direction.adjacents.map (d)=>
               @getRelativeTile(d.x, d.y)
             .filter (t)=>
