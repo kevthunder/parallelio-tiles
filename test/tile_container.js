@@ -116,7 +116,7 @@
       res;
       return assert.equal(container, res);
     });
-    return it('can get tile in a range', function() {
+    it('can get tile in a range', function() {
       var center, container, inRange;
       container = new TileContainer();
       container.tap(function() {
@@ -134,6 +134,58 @@
       assert.notInclude(inRange, container.getTile(1, 3));
       assert.notInclude(inRange, container.getTile(0, 3));
       return assert.equal(inRange.length, 5);
+    });
+    it('can find closest tile', function() {
+      var container;
+      container = new TileContainer();
+      container.tap(function() {
+        var c, t;
+        t = function(opt) {
+          return new Tile(opt.x, opt.y);
+        };
+        c = function(opt) {
+          return (new Tile(opt.x, opt.y)).tap(function() {
+            return this.candidate = true;
+          });
+        };
+        return this.loadMatrix([[t, t, t, t, t, t, t], [t, c, t, c, t, t, t], [t, t, t, t, t, t, t], [t, t, c, t, t, t, t], [t, t, t, t, t, t, t], [t, t, t, t, t, t, t], [t, t, t, t, t, t, t]]);
+      });
+      assert.equal(container.closest(container.getTile(6, 3), (tile) => {
+        return tile.candidate;
+      }), container.getTile(3, 1));
+      assert.equal(container.closest(container.getTile(4, 3), (tile) => {
+        return tile.candidate;
+      }), container.getTile(2, 3));
+      return assert.equal(container.closest(container.getTile(0, 0), (tile) => {
+        return tile.candidate;
+      }), container.getTile(1, 1));
+    });
+    it('can merge with another container', function() {
+      var container1, container2, merged;
+      container1 = new TileContainer();
+      container1.addTile(new Tile(1, 1));
+      container2 = new TileContainer();
+      container2.addTile(new Tile(2, 2));
+      merged = container1.merge(container2, (a, b) => {
+        return a || b;
+      });
+      assert.exists(merged.getTile(1, 1));
+      return assert.exists(merged.getTile(2, 2));
+    });
+    return it('can merge with another container (intersection)', function() {
+      var container1, container2, merged;
+      container1 = new TileContainer();
+      container1.addTile(new Tile(1, 1));
+      container1.addTile(new Tile(2, 2));
+      container2 = new TileContainer();
+      container2.addTile(new Tile(2, 2));
+      container2.addTile(new Tile(3, 3));
+      merged = container1.merge(container2, (a, b) => {
+        return a && b;
+      });
+      assert.notExists(merged.getTile(1, 1));
+      assert.exists(merged.getTile(2, 2));
+      return assert.notExists(merged.getTile(3, 3));
     });
   });
 

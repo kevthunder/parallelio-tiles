@@ -7,6 +7,8 @@ class TileContainer extends Element
     @init()
     
   @properties
+    owner:
+      default: true
     boundaries:
       calcul:->
         boundaries = {top:null,left:null,bottom:null,right:null}
@@ -36,7 +38,8 @@ class TileContainer extends Element
       @tiles.push(tile)
       @coords[tile.x] = {} unless @coords[tile.x]?
       @coords[tile.x][tile.y] = tile
-      tile.container = this
+      if @owner
+        tile.container = this
       if @_boundaries?.calculated
         @_addToBondaries(tile,@_boundaries.value)
     this
@@ -46,7 +49,8 @@ class TileContainer extends Element
     if index > -1
       @tiles.splice(index, 1)
       delete @coords[tile.x][tile.y]
-      tile.container = null
+      if @owner
+        tile.container = null
       if @_boundaries?.calculated
         if @boundaries.top == tile.y || @boundaries.bottom == tile.y || @boundaries.left == tile.x || @boundaries.right == tile.x
           @invalidateBoundaries()
@@ -87,8 +91,48 @@ class TileContainer extends Element
     @tiles.slice()
     
   clearAll: ->
-    for tile in @tiles
-      tile.container = null
+    if @owner
+      for tile in @tiles
+        tile.container = null
     @coords = {}
     @tiles = []
     this
+  
+  closest: (originTile, filter)->
+    getScore = (candidate)->
+      if candidate.score?
+        candidate.score
+      else
+        candidate.score = candidate.tile.dist(originTile).length
+    candidates = @tiles
+      .filter(filter)
+      .map((t) => {tile:t})
+    candidates.sort (a, b) =>
+        getScore(a) - getScore(b) 
+    candidates[0].tile
+
+
+  copy: ->
+    out = new TileContainer()
+    out.coords = @coords
+    out.tiles = @tiles
+    out.owner = false
+    out
+
+  merge: (ctn, mergeFn, asOwner = false) ->
+    out = new TileContainer()
+    out.owner = asOwner
+    tmp = ctn.copy()
+    @tiles.forEach (tileA)->
+      tileB = tmp.getTile(tileA.x,tileA.y)
+      if tileB
+        tmp.removeTile(tileB)
+      mergedTile = mergeFn(tileA, tileB)
+      if mergedTile
+        out.addTile(mergedTile)
+    tmp.tiles.forEach (tileB)->
+      mergedTile = mergeFn(null, tileB)
+      if mergedTile
+        out.addTile(mergedTile)
+    out
+

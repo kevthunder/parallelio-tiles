@@ -74,9 +74,6 @@ describe 'TileContainer', ->
     assert.isFalse container.getTile(0,5).walkable
     assert.isTrue container.getTile(7,2).walkable
 
-
-    
-
   it 'can chain addTile, loadMatrix and clearAll', ->
     container = new TileContainer()
     res = container.addTile(new Tile())
@@ -107,3 +104,47 @@ describe 'TileContainer', ->
     assert.notInclude inRange, container.getTile(1,3)
     assert.notInclude inRange, container.getTile(0,3)
     assert.equal inRange.length, 5
+
+  it 'can find closest tile', ->
+    container = new TileContainer()
+    container.tap ->
+          t = (opt) ->
+            (new Tile(opt.x,opt.y))
+          c = (opt) ->
+            (new Tile(opt.x,opt.y)).tap ->
+              @candidate = true
+          @loadMatrix([
+            [t, t, t, t, t, t, t],
+            [t, c, t, c, t, t, t],
+            [t, t, t, t, t, t, t],
+            [t, t, c, t, t, t, t],
+            [t, t, t, t, t, t, t],
+            [t, t, t, t, t, t, t],
+            [t, t, t, t, t, t, t]
+          ]);
+    assert.equal container.closest(container.getTile(6,3), (tile)=> tile.candidate), container.getTile(3,1)
+    assert.equal container.closest(container.getTile(4,3), (tile)=> tile.candidate), container.getTile(2,3)
+    assert.equal container.closest(container.getTile(0,0), (tile)=> tile.candidate), container.getTile(1,1)
+
+  it 'can merge with another container', ->
+    container1 = new TileContainer()
+    container1.addTile(new Tile(1,1))
+    container2 = new TileContainer()
+    container2.addTile(new Tile(2,2))
+    merged = container1.merge(container2, (a,b)=> a||b)
+    
+    assert.exists merged.getTile(1,1)
+    assert.exists merged.getTile(2,2)
+
+  it 'can merge with another container (intersection)', ->
+    container1 = new TileContainer()
+    container1.addTile(new Tile(1,1))
+    container1.addTile(new Tile(2,2))
+    container2 = new TileContainer()
+    container2.addTile(new Tile(2,2))
+    container2.addTile(new Tile(3,3))
+    merged = container1.merge(container2, (a,b)=> a and b)
+
+    assert.notExists merged.getTile(1,1)
+    assert.exists merged.getTile(2,2)
+    assert.notExists merged.getTile(3,3)
