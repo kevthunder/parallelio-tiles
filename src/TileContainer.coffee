@@ -110,7 +110,10 @@ class TileContainer extends Element
       .map((t) => new TileReference(t))
     candidates.sort (a, b) =>
       getScore(a) - getScore(b) 
-    candidates[0].tile
+    if candidates.length > 0
+      candidates[0].tile
+    else
+      null
 
 
   copy: ->

@@ -160,6 +160,25 @@
         return tile.candidate;
       }), container.getTile(1, 1));
     });
+    it('can fail to find closest tile', function() {
+      var container;
+      container = new TileContainer();
+      container.tap(function() {
+        var c, t;
+        t = function(opt) {
+          return new Tile(opt.x, opt.y);
+        };
+        c = function(opt) {
+          return (new Tile(opt.x, opt.y)).tap(function() {
+            return this.candidate = true;
+          });
+        };
+        return this.loadMatrix([[t, t], [t, c]]);
+      });
+      return assert.isNull(container.closest(container.getTile(0, 0), (tile) => {
+        return false;
+      }), container.getTile(1, 1));
+    });
     it('can merge with another container', function() {
       var container1, container2, merged;
       container1 = new TileContainer();

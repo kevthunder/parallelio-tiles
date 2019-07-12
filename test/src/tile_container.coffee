@@ -126,6 +126,20 @@ describe 'TileContainer', ->
     assert.equal container.closest(container.getTile(4,3), (tile)=> tile.candidate), container.getTile(2,3)
     assert.equal container.closest(container.getTile(0,0), (tile)=> tile.candidate), container.getTile(1,1)
 
+  it 'can fail to find closest tile', ->
+    container = new TileContainer()
+    container.tap ->
+          t = (opt) ->
+            (new Tile(opt.x,opt.y))
+          c = (opt) ->
+            (new Tile(opt.x,opt.y)).tap ->
+              @candidate = true
+          @loadMatrix([
+            [t, t],
+            [t, c],
+          ]);
+    assert.isNull container.closest(container.getTile(0,0), (tile)=> false), container.getTile(1,1)
+
   it 'can merge with another container', ->
     container1 = new TileContainer()
     container1.addTile(new Tile(1,1))
