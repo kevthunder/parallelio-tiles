@@ -12,7 +12,7 @@
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.1",
-    "gulp": "^4.0",
+    "gulp": "^4.0.2",
     "gulp-coffee": "^3.0.2",
     "gulp-mocha": "^6.0.0",
     "mocha": "^5.2.0",

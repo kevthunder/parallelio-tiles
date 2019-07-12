@@ -7,4 +7,6 @@
 
   require('./tiled');
 
+  require('./tileReference');
+
 }).call(this);

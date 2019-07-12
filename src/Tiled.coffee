@@ -29,3 +29,6 @@ class Tiled extends Element
 
   canGoOnTile: (tile)->
     true
+    
+  getFinalTile: ->
+    @tile.getFinalTile()

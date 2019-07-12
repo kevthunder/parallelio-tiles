@@ -54,6 +54,8 @@ class Tile extends Element
       child.tile = null
 
   dist: (tile)->
+    if tile?.getFinalTile?
+      tile = tile.getFinalTile()
     if tile?.x? and tile.y? and @x? and @y? and (@container == tile.container || ctnDist = @container?.dist?(tile.container))
       x = tile.x - @x
       y = tile.y - @y
@@ -67,4 +69,7 @@ class Tile extends Element
       }
     else
       null
+
+  getFinalTile: ->
+    this
       

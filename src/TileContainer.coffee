@@ -1,4 +1,5 @@
 Element = require('spark-starter').Element
+TileReference = require('./TileReference')
 
 
 class TileContainer extends Element
@@ -103,12 +104,12 @@ class TileContainer extends Element
       if candidate.score?
         candidate.score
       else
-        candidate.score = candidate.tile.dist(originTile).length
+        candidate.score = candidate.getFinalTile().dist(originTile).length
     candidates = @tiles
       .filter(filter)
-      .map((t) => {tile:t})
+      .map((t) => new TileReference(t))
     candidates.sort (a, b) =>
-        getScore(a) - getScore(b) 
+      getScore(a) - getScore(b) 
     candidates[0].tile
 
 
