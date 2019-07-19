@@ -21,6 +21,6 @@
     "source-map-support": "^0.5.9"
   },
   "dependencies": {
-    "spark-starter": "kevthunder/spark-starter#browserify"
+    "spark-starter": "kevthunder/spark-starter#v0.10.x"
   }
 }
