@@ -2,7 +2,7 @@ Element = require('spark-starter').Element
 TileReference = require('./TileReference')
 
 
-class TileContainer extends Element
+module.exports = class TileContainer extends Element
   constructor: ->
     super()
     @init()

@@ -1,7 +1,7 @@
 Element = require('spark-starter').Element
 Direction = require('./Direction')
 
-class Tile extends Element
+module.exports = class Tile extends Element
   constructor: (@x, @y) ->
     super()
     @init()

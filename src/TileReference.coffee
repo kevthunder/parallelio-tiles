@@ -1,5 +1,5 @@
 
-class TileReference
+module.exports = class TileReference
   constructor: (@tile) ->
     Object.defineProperties this,
       x: 

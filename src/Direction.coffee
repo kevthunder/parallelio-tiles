@@ -1,4 +1,4 @@
-class Direction
+module.exports = class Direction
   constructor: (@name,@x,@y,@inverseName)->
   getInverse: ->
     this.constructor[@inverseName]

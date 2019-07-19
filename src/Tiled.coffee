@@ -1,6 +1,6 @@
 Element = require('spark-starter').Element
 
-class Tiled extends Element
+module.exports = class Tiled extends Element
   @properties
     tile:
       change: (old) ->
