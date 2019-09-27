@@ -3,7 +3,7 @@ Element = require('spark-starter').Element
 module.exports = class Tiled extends Element
   @properties
     tile:
-      change: (old) ->
+      change: (val, old) ->
         if old?
           old.removeChild(this)
         if @tile

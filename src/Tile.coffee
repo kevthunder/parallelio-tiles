@@ -16,10 +16,10 @@ module.exports = class Tile extends Element
       change: ->
         if @container?
           @adjacentTiles.forEach (tile)->
-            tile.invalidateAdjacentTiles()
+            tile.adjacentTilesProperty.invalidate()
     adjacentTiles:
       calcul: (invalidation)->
-        if invalidation.prop('container')
+        if invalidation.prop(@containerProperty)
           Direction.adjacents.map (d)=>
               @getRelativeTile(d.x, d.y)
             .filter (t)=>

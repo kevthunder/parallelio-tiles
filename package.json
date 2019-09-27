@@ -16,11 +16,11 @@
     "gulp-clean": "^0.4.0",
     "gulp-coffee": "^3.0.2",
     "gulp-mocha": "^6.0.0",
-    "gulp-require-index": "github:kevthunder/gulp-require-index",
+    "gulp-require-index": "^0.1.1",
     "mocha": "^5.2.0",
     "source-map-support": "^0.5.9"
   },
   "dependencies": {
-    "spark-starter": "kevthunder/spark-starter#v0.10.x"
+    "spark-starter": "kevthunder/spark-starter#use-spark-properties"
   }
 }

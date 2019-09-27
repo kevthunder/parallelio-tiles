@@ -41,8 +41,8 @@ module.exports = class TileContainer extends Element
       @coords[tile.x][tile.y] = tile
       if @owner
         tile.container = this
-      if @_boundaries?.calculated
-        @_addToBondaries(tile,@_boundaries.value)
+      if @boundariesProperty.getter.calculated
+        @_addToBondaries(tile,@boundariesProperty.value)
     this
 
   removeTile: (tile) ->
@@ -52,9 +52,9 @@ module.exports = class TileContainer extends Element
       delete @coords[tile.x][tile.y]
       if @owner
         tile.container = null
-      if @_boundaries?.calculated
+      if @boundariesProperty.getter.calculated
         if @boundaries.top == tile.y || @boundaries.bottom == tile.y || @boundaries.left == tile.x || @boundaries.right == tile.x
-          @invalidateBoundaries()
+          @boundariesProperty.invalidate()
 
   removeTileAt: (x, y) ->
     if tile = @getTile(x, y)
