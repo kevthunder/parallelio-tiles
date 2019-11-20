@@ -50,6 +50,11 @@
       tile = new Tile();
       return assert.notExists(tile.getRelativeTile(1, 1));
     });
+    it('return itself when getting Tile by relative position with (0, 0)', function() {
+      var tile;
+      tile = new Tile();
+      return assert.equal(tile.getRelativeTile(0, 0), tile);
+    });
     it('can calcul the distance to a tile', function() {
       var tile1, tile2;
       tile1 = new Tile(1, 1);

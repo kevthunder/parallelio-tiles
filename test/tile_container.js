@@ -87,7 +87,7 @@
         right: 2
       });
     });
-    it('should create load a Matrix of tiles', function() {
+    it('can load a Matrix of tiles', function() {
       var container;
       container = new TileContainer();
       container.tap(function() {

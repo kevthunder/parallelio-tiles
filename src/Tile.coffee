@@ -28,6 +28,8 @@ module.exports = class Tile extends Element
 
     
   getRelativeTile: (x, y) ->
+    if x == 0 and y == 0
+      return this
     if @container?
       @container.getTile(@x + x, @y + y)
 

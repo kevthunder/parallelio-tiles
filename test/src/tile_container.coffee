@@ -50,7 +50,7 @@ describe 'TileContainer', ->
     assert.deepEqual container.boundaries, {top:-3,left:-3,bottom:2,right:2}
 
 
-  it 'should create load a Matrix of tiles', ->
+  it 'can load a Matrix of tiles', ->
     container = new TileContainer()
     container.tap ->
       w = (opt) ->

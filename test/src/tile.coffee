@@ -42,6 +42,10 @@ describe 'Tile', ->
     tile = new Tile()
     assert.notExists tile.getRelativeTile(1,1)
 
+  it 'return itself when getting Tile by relative position with (0, 0)', ->
+    tile = new Tile()
+    assert.equal tile.getRelativeTile(0,0), tile
+
   it 'can calcul the distance to a tile', ->
     tile1 = new Tile(1,1)
     tile2 = new Tile(4,5)
