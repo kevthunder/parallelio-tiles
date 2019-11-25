@@ -1,6 +1,6 @@
-var gulp = require('gulp')
-var mocha = require('gulp-mocha')
-var requireIndex = require('gulp-require-index')
+const gulp = require('gulp')
+const mocha = require('gulp-mocha')
+const requireIndex = require('gulp-require-index')
 
 gulp.task('buildIndex', function () {
   return gulp.src(['./lib/**/*.js', '!./lib/spark-starter.js'])
