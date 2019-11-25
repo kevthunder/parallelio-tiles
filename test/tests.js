@@ -1,12 +1,11 @@
-(function() {
-  require('./tile_container');
+(function () {
+  require('./tile_container')
 
-  require('./tile');
+  require('./tile')
 
-  require('./direction');
+  require('./direction')
 
-  require('./tiled');
+  require('./tiled')
 
-  require('./tileReference');
-
-}).call(this);
+  require('./tileReference')
+}).call(this)
