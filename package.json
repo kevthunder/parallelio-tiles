@@ -4,9 +4,10 @@
   "description": "Parallelio tiles component",
   "main": "lib/tiles.js",
   "scripts": {
-    "test": "gulp test",
+    "test": "npm run build && nyc --reporter=lcov --reporter=text mocha test/tests.js",
     "test-debug": "gulp test-debug",
     "build": "gulp build && eslint --fix lib/tiles.js",
+    "cover": "eslint '**/*.js' && npm run test && nyc check-coverage --statements 90 --branches 80 --functions 90 --lines 90",
     "lint": "eslint '**/*.js'",
     "lint-fix": "eslint --fix '**/*.js'"
   },
