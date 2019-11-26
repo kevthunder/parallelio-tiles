@@ -3,7 +3,7 @@ const mocha = require('gulp-mocha')
 const requireIndex = require('gulp-require-index')
 
 gulp.task('buildIndex', function () {
-  return gulp.src(['./lib/**/*.js', '!./lib/spark-starter.js'])
+  return gulp.src(['./lib/**/*.js', '!./lib/tiles.js'])
     .pipe(requireIndex({ name: 'tiles.js' }))
     .pipe(gulp.dest('./lib'))
 })

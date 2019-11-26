@@ -1,5 +1,6 @@
 
 const assert = require('chai').assert
+const expect = require('chai').expect
 const TileContainer = require('../lib/TileContainer')
 const Tile = require('../lib/Tile')
 const Tiled = require('../lib/Tiled')
@@ -134,5 +135,16 @@ describe('Tile', function () {
       this.tile = tile2
     })
     assert.equal(tile1.findDirectionOf(tiled), Direction.up)
+  })
+  it('can create a rotated copy', function () {
+    expect(new Tile(0, -3).copyAndRotate(Math.PI / 2).getCoord()).to.deep.equal({ x: 3, y: 0 })
+    expect(new Tile(0, 4).copyAndRotate(Math.PI / 2).getCoord()).to.deep.equal({ x: -4, y: 0 })
+    expect(new Tile(1, 5).copyAndRotate(Math.PI).getCoord()).to.deep.equal({ x: -1, y: -5 })
+    expect(new Tile(0, 6).copyAndRotate(Math.PI * 3 / 2).getCoord()).to.deep.equal({ x: 6, y: 0 })
+  })
+  it('can create a rotated copy with center', function () {
+    expect(new Tile(0, -6).copyAndRotate(Math.PI / 2, { x: 0, y: 0 }).getCoord()).to.deep.equal({ x: 6, y: 0 })
+    expect(new Tile(1, -5).copyAndRotate(Math.PI / 2, { x: 1, y: 1 }).getCoord()).to.deep.equal({ x: 7, y: 1 })
+    expect(new Tile(3, 7).copyAndRotate(Math.PI, { x: 2, y: 2 }).getCoord()).to.deep.equal({ x: 1, y: -3 })
   })
 })
