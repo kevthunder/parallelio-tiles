@@ -7,7 +7,13 @@ describe('Direction', function () {
     assert.equal(Direction.up.x, 0)
     assert.equal(Direction.up.y, -1)
   })
-  return it('can get inverse direction', function () {
+  it('can get inverse direction', function () {
     assert.equal(Direction.up.getInverse(), Direction.down)
+  })
+  it('can rotate direction', function () {
+    assert.equal(Direction.up.rotate(Math.PI / 2), Direction.right)
+    assert.equal(Direction.up.rotate(Math.PI), Direction.down)
+    assert.equal(Direction.up.rotate(Math.PI / 2 * 3), Direction.left)
+    assert.equal(Direction.right.rotate(Math.PI / 2), Direction.down)
   })
 })
