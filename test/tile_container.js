@@ -98,12 +98,49 @@ describe('TileContainer', function () {
           this.walkable = true
         })
       }
-      return this.loadMatrix([[w, w, w, w, w, w, w, w, w, w, w, w], [w, f, f, w, f, f, f, f, f, f, f, w], [w, f, f, w, f, f, f, f, f, f, f, w], [w, f, f, w, w, f, w, w, w, f, f, w], [w, f, f, w, f, f, f, f, w, f, f, w], [w, f, f, w, f, f, f, f, w, f, f, w], [w, f, f, w, f, f, f, f, w, f, f, w], [w, w, w, w, w, w, w, w, w, w, w, w]])
+      return this.loadMatrix([
+        [w, w, w, w, w, w, w, w, w, w, w, w],
+        [w, f, f, w, f, f, f, f, f, f, f, w],
+        [w, f, f, w, f, f, f, f, f, f, f, w],
+        [w, f, f, w, w, f, w, w, w, f, f, w],
+        [w, f, f, w, f, f, f, f, w, f, f, w],
+        [w, f, f, w, f, f, f, f, w, f, f, w],
+        [w, f, f, w, f, f, f, f, w, f, f, w],
+        [w, w, w, w, w, w, w, w, w, w, w, w]
+      ])
     })
     assert.isObject(container.getTile(1, 1))
     assert.equal(container, container.getTile(1, 1).container)
     assert.isFalse(container.getTile(0, 5).walkable)
     assert.isTrue(container.getTile(7, 2).walkable)
+  })
+  it('can load a Matrix at offset', function () {
+    var container
+    container = new TileContainer()
+    container.tap(function () {
+      var f, w
+      w = function (opt) {
+        return (new Tile(opt.x, opt.y)).tap(function () {
+          this.walkable = false
+        })
+      }
+      f = function (opt) {
+        return (new Tile(opt.x, opt.y)).tap(function () {
+          this.walkable = true
+        })
+      }
+      return this.loadMatrix([
+        [w, w, w, w, w, w],
+        [w, f, f, w, f, w],
+        [w, f, f, f, f, w],
+        [w, f, f, w, f, w],
+        [w, w, w, w, w, w]
+      ], { x: 2, y: 2 })
+    })
+    assert.isUndefined(container.getTile(1, 1))
+    assert.isObject(container.getTile(3, 3))
+    assert.isFalse(container.getTile(2, 5).walkable)
+    assert.isTrue(container.getTile(3, 3).walkable)
   })
   it('can chain addTile, loadMatrix and clearAll', function () {
     var container, res
