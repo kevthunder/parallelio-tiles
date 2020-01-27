@@ -6,6 +6,7 @@ describe('Direction', function () {
   it('has coordinates', function () {
     assert.equal(Direction.up.x, 0)
     assert.equal(Direction.up.y, -1)
+    assert.equal(Direction.right.angle, Math.PI / 2)
   })
   it('can get inverse direction', function () {
     assert.equal(Direction.up.getInverse(), Direction.down)
