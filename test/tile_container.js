@@ -142,6 +142,38 @@ describe('TileContainer', function () {
     assert.isFalse(container.getTile(2, 5).walkable)
     assert.isTrue(container.getTile(3, 3).walkable)
   })
+  it('can reduce a matrix of functions', function () {
+    const container = new TileContainer()
+    const a = function (opt) {
+      return (new Tile(opt.x, opt.y)).tap(function () {
+        this.val = 1
+      })
+    }
+    const b = function (opt) {
+      return (new Tile(opt.x, opt.y)).tap(function () {
+        this.val = 2
+      })
+    }
+    container.loadMatrix([
+      [a, b, a],
+      [a, a, b],
+      [a, b, b]
+    ])
+
+    const p = function (val, tile, pos) {
+      return val + tile.val
+    }
+    const m = function (val, tile, pos) {
+      return val - tile.val
+    }
+    const res = container.reduceMatrix([
+      [p, p, m],
+      [m, p, m],
+      [m, p, m]
+    ], 6)
+    assert.equal(res, 5)
+  })
+
   it('can chain addTile, loadMatrix and clearAll', function () {
     var container, res
     container = new TileContainer()
