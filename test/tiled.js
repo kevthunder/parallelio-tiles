@@ -12,6 +12,8 @@ describe('Tiled', function () {
     assert.equal(tiled.tile, tile)
     assert.equal(tile.children.length, 1)
     assert.include(tile.children.toArray(), tiled)
+    tiled.tile = null
+    assert.notInclude(tile.children.toArray(), tiled)
   })
   it('can choose a random tile to be put on', function () {
     var tiled, tiles
@@ -20,7 +22,7 @@ describe('Tiled', function () {
     tiled.putOnRandomTile(tiles)
     assert.include(tiles, tiled.tile)
   })
-  return it('cannot choose a random tile to be put on if none are valid', function () {
+  it('cannot choose a random tile to be put on if none are valid', function () {
     var tiled, tiles
     tiles = [new Tile(), new Tile(), new Tile()]
     tiled = new Tiled()
